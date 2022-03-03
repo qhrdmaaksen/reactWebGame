@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--리액트를 사용하려면 필수 파일 두개-->
+  <!--개발 단계이기때문에 development.js 로 사용하며 실제 배포할때엔 production.js 로 변환-->
+  <!--첫번째 파일은 리액트의 핵심적인 요소가 담긴 자바스크립트 파일-->
+  <script crossorigin src="http://unpkg.com/react@16/umd/react.development.js"></script>
+  <!--react-dom 은 리액트를 웹에다가 붙여주는 역할-->
+  <script crossorigin src="http://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const e = React.createElement; //html tag create
+
+    class LikesButton extends React.Component {
+      constructor(props) { //클래스에는 기본적으로 constructor 가 있다
+        super(props); //컴포넌트가 실행될때 제일 먼저 실행됨
+      }
+
+      render() {//좋아요 버튼을 어떻게 화면에 표시해줄지 결정해주는 메서드
+
+      }
+    }
+  </script>
+</body>
+</html>
