@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,25 +8,48 @@
   <!--리액트를 사용하려면 필수 파일 두개-->
   <!--개발 단계이기때문에 development.js 로 사용하며 실제 배포할때엔 production.js 로 변환-->
   <!--첫번째 파일은 리액트의 핵심적인 요소가 담긴 자바스크립트 파일-->
-  <script crossorigin src="http://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <!--react-dom 은 리액트를 웹에다가 붙여주는 역할-->
-  <script crossorigin src="http://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <!--최신 문법들을 js 에서 사용할 수 있도록 해주는 babel-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <title>Document</title>
 </head>
+
 <body>
   <div id="root"></div>
-  <script>
+  <script type="text/babel">//script type babel 지정해주면 적용됨
     const e = React.createElement; //html tag create
 
-    class LikesButton extends React.Component {
+    class LikeButton extends React.Component {
       constructor(props) { //클래스에는 기본적으로 constructor 가 있다
         super(props); //컴포넌트가 실행될때 제일 먼저 실행됨
+        this.state = {
+          liked: false,
+        }
       }
 
       render() {//좋아요 버튼을 어떻게 화면에 표시해줄지 결정해주는 메서드
+        //html을 js로 표현해줄땐 camel case로 표현
 
+        return <button type="submit" onClick={() => {this.setState({ liked: true })} }>
+          {this.state.liked === true ? `Liked` : `Like`}
+          </button> //JSX (JS,XML)
+
+
+        //return e(`button`, { onClick: () => { this.setState({liked: true})}, type: `submit` }, this.state.liked === true ?  `Liked` : `Like`,); 
+        //  return e (`tag`, event , `inFieldWrite`)
+        //<button onclick="() => { console.log(`clicked`)}" type="submit">Like</button> 을 만들겠다라는 뜻, 클릭시 clicked가 콘솔에찍힘
+        //this.setState({liked: true})} 버튼을 누르면 liked 로 상태가 바뀜 
       }
     }
   </script>
+  <script type="text/babel">
+    //ReactDOM 은 만들것을 웹에 랜더링을 하겠다 (화면에 실제로 반영) (ReactDOM 에 DOM 은 모두 대문자다... 조심하자)
+    //ReactDOM.render(e(LikeButton), document.querySelector(`#root`));//위에 id= root 에 그린다.
+
+    ReactDOM.render(<LikeButton />, document.querySelector(`#root`));
+  </script>
 </body>
+
 </html>
