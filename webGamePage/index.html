@@ -48,7 +48,7 @@
     //ReactDOM 은 만들것을 웹에 랜더링을 하겠다 (화면에 실제로 반영) (ReactDOM 에 DOM 은 모두 대문자다... 조심하자)
     //ReactDOM.render(e(LikeButton), document.querySelector(`#root`));//위에 id= root 에 그린다.
 
-    ReactDOM.render(<LikeButton />, document.querySelector(`#root`));
+    ReactDOM.render(<div><LikeButton /><LikeButton /></div>, document.querySelector(`#root`));
   </script>
 </body>
 

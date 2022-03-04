@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--리액트를 사용하려면 필수 파일 두개-->
+  <!--개발 단계이기때문에 development.js 로 사용하며 실제 배포할때엔 production.js 로 변환-->
+  <!--첫번째 파일은 리액트의 핵심적인 요소가 담긴 자바스크립트 파일-->
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <!--react-dom 은 리액트를 웹에다가 붙여주는 역할-->
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <!--최신 문법들을 js 에서 사용할 수 있도록 해주는 babel-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const GuGuDan = () => {//함수 컴포넌트를 활용한 구구단
+      //구조분해 할당
+      const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+      const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+      const [result, setResult] = React.useState(``);
+      const [value, setValue] = React.useState(``);
+      const [gameName, setGameName] = React.useState(`vitamin777 99단 GAME Hooks`);
+      const inputRef = React.useRef(null);//ref 사용하기
+
+      const onChangeInput = (e) => {
+        setValue(e.target.value);
+      }
+      const onSubmitForm = (e) => {
+        e.preventDefault();
+        if (parseInt(value) === first * second) {
+          setResult((prevResult) => {//예전 값 사용
+            return `축하합니다, 정답은 ` + value + ` 입니다.`;
+          }) 
+          setFirst(Math.ceil(Math.random() * 9));
+          setSecond(Math.ceil(Math.random() * 9));
+          setValue(``);
+          inputRef.current.focus();
+        } else {
+          setResult(`땡! 틀렸습니다!`);
+          setValue(``);
+          inputRef.current.focus(); //ref 사용하기
+        }
+      }
+      console.log(`렌더링`);
+      return (
+        <React.Fragment>
+          <div>{gameName}</div>
+          <div>{first} 곱하기 {second} 는 ?</div>
+          <form  onSubmit={onSubmitForm}>
+            <input type="number" ref={inputRef} onChange={onChangeInput} value={value} />
+            <button type="submit">입력</button>
+          </form>
+          <div>{result}</div>
+        </React.Fragment>);
+    }
+  </script>
+  <script type="text/babel">
+    ReactDOM.render(<GuGuDan/>, document.querySelector(`#root`));
+  </script>
+</body>
+
+</html>
