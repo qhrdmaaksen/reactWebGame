@@ -30,7 +30,7 @@ const GuGuDan = () => {//함수 컴포넌트를 활용한 구구단
   }
   console.log(`렌더링`);
   return (
-    <React.Fragment>
+    <>
       <div>{gameName}</div>
       <div>{first} 곱하기 {second} 는 ?</div>
       <form  onSubmit={onSubmitForm}>
@@ -38,7 +38,7 @@ const GuGuDan = () => {//함수 컴포넌트를 활용한 구구단
         <button type="submit">입력</button>
       </form>
       <div>{result}</div>
-    </React.Fragment>);
+    </>);
 }
 
 module.exports = GuGuDan ;
