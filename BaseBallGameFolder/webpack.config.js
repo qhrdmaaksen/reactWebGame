@@ -3,8 +3,9 @@ const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
   name: "baseBall-Setting",
+  devServer: { port: 8080 },
   mode: "development",
-  devtool: "eval",
+  devtool: "inline-source-map",
   resolve: {
     extensions: [".js", ".jsx"],
   },
@@ -37,7 +38,6 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "[name].js",
-    publicPath: "/dist",
   },
   devServer: {
     devMiddleware: { publicPath: "/dist" },
