@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import TryHooks from './TryHooks';
 const { memo } = React ;
 
@@ -17,6 +17,7 @@ const BaseBallFunc = memo(() => {
   const [value, setValue] = useState('');
   const [answer, setAnswer] = useState(getNumbers());
   const [tries, setTries] = useState([]);
+  const inputRef = useRef(null);
 
   const onSubmitForm = (e) => {
     e.preventDefault()
@@ -31,6 +32,7 @@ const BaseBallFunc = memo(() => {
       setValue('')
       setAnswer(getNumbers())
       setTries([])
+      inputRef.current.focus()
     } else { // 답이 틀렸다면
       const answerArray = value.split('').map((v) => parseInt(v))
       let strike = 0;
@@ -41,6 +43,7 @@ const BaseBallFunc = memo(() => {
         setValue('')
         setAnswer(getNumbers())
         setTries([])
+        inputRef.current.focus()
       } else {
         for (let i = 0; i < 4; i += 1) {
           if (answerArray[i] === answer[i]) {
@@ -53,8 +56,9 @@ const BaseBallFunc = memo(() => {
           return (
             [...prevTries, { try: value, result: `${strike} 스트라이크, ${ball} 볼` }]
           )
-        })
+        }) 
         setValue('')
+        inputRef.current.focus()
       }
     }
   }
@@ -69,7 +73,7 @@ const BaseBallFunc = memo(() => {
     <>
       <h1>{result}</h1>
       <form action="#" onSubmit={onSubmitForm}>
-        <input maxLength={4} value={value} onChange={onChangeInput} />
+        <input ref={inputRef} maxLength={4} value={value} onChange={onChangeInput} />
       </form>
       <div>시도 : {tries.length}</div>
       <ul>

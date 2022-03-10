@@ -78,6 +78,10 @@ class BaseBallFunc extends Component {
 
   inputRef = createRef() // this.inputRef
 
+  // onInputRef = (c) => {
+  //   this.inputRef = c
+  // }
+
   render() {
     const { result, value, tries } = this.state
     return (
