@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import TryHooks from './TryHooks';
+const { memo } = React ;
 
 function getNumbers() { // 숫자 네개를 겹치지 않고 랜덤하게 뽑는 함수
   const candidate = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -11,7 +12,7 @@ function getNumbers() { // 숫자 네개를 겹치지 않고 랜덤하게 뽑는
   return array;
 }
 
-const BaseBallFunc = () => {
+const BaseBallFunc = memo(() => {
   const [result, setResult] = useState('');
   const [value, setValue] = useState('');
   const [answer, setAnswer] = useState(getNumbers());
@@ -80,7 +81,7 @@ const BaseBallFunc = () => {
       </ul>
     </>
   )
-}
+})
 
 
 
