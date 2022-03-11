@@ -5,7 +5,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 //const RSG = require('./responseSpeedClass')
-import RSG from './responseSpeedClass.jsx'
+//import RSG from './responseSpeedClass.jsx'
+import RSG from './responseSpeedHooks.jsx'
 
 //const Hot = hot(RSG)
 
