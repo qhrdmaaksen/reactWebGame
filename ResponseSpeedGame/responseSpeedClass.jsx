@@ -73,4 +73,4 @@ class ResponseCheck extends Component {
   }
 }
 
-export default ResponseCheck;
+//export default ResponseCheck;
