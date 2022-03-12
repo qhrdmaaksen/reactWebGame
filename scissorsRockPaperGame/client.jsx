@@ -1,6 +1,10 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
+// const React = require('react');
+// const ReactDOM = require('react-dom');
+// const SRPgame = require('./SRPgameClass')
 
-const SRPgame = require('./SRPgame')
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-ReactDOM.render(<SRPgame />, document.querySelector('#root'))
+import RSPgame from './RSPgameClass';
+
+ReactDOM.render(<RSPgame />, document.querySelector('#root'))
