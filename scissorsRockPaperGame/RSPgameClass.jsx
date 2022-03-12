@@ -24,7 +24,7 @@ const computerChoice = (imgCoord) => {
 class RSP extends PureComponent {
   state = {
     result: '',
-    imgCoord: '0', // 이미지의 좌표
+    imgCoord: rspCoords.바위, // 이미지의 좌표
     score: 0,
   };
 
@@ -83,13 +83,12 @@ class RSP extends PureComponent {
     } else {
       this.setState((prevState) => {
         return {
-          return: '졌습니다.',
+          result: '졌습니다.',
           score: prevState.score - 1,
         }
       })
     }
-    setTimeout(() =>{
-
+    setTimeout(() => {
       this.interval = setInterval(this.changeHand, 300) // 0,1 초 뒤 손 움직이게 
     }, 2000) // 2초 뒤 결과 확인
   }
@@ -111,4 +110,4 @@ class RSP extends PureComponent {
   }
 }
 
-export default RSP;
+//export default RSP;
