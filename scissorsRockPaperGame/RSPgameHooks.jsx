@@ -1,4 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
+
+/*hooks useEffect =
+                                                              useEffect 는 세로 
+                          result , imgCoords , score
+componentDidMount
+componentDidUpdate
+componentWillUnmount
+*/
 
 /*라이프 사이클 = 클래스의 경우 -> constructor -> rendering -> ref 부분실행 -> componentDidMount -> (setState or props바뀔때 -> shouldComponentUpdate(true)
  -> render -> componentDidUpdate -> 부모가 나를 없앨을때 -> componentWillUnmount -> 소멸 */
@@ -21,7 +29,7 @@ const computerChoice = (imgCoord) => {
   })[0]
 }
 
-const RSP = () => {
+const RSP = memo(() => {
   const [result, setResult] = useState('')
   const [imgCoord, setImgCoord] = useState(rspCoords.바위)
   const [score, setScore] = useState(0)
@@ -77,6 +85,6 @@ const RSP = () => {
       <div>현재 {score} 점</div>
     </>
   )
-}
+})
 
 export default RSP;
