@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import lottoClassFunc from './lottoGameClass.jsx'
+import LottoClassFunc from './lottoGameClass'
 
-ReactDOM.render(<lottoClassFunc />, document.querySelector('#root'))
+ReactDOM.render(<LottoClassFunc />, document.querySelector('#root'))

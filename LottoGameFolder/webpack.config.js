@@ -6,10 +6,10 @@ module.exports = {
   mode: "development",
   devtool: "eval",
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
   },
   entry: {
-    app: ["./client"],
+    app: ['./client'],
   },
   module: {
     rules: [
