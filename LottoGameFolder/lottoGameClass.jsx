@@ -13,6 +13,7 @@ function getWinNumbers() {
   return [...winNumbers, bonusNumber]
 }
 
+
 class lottoGame extends Component {
   state = {
     winNumbers: getWinNumbers(), // 미리 data 를 준비해놓음, 당첨 숫자들
@@ -23,7 +24,7 @@ class lottoGame extends Component {
 
   timeout = []
 
-  componentDidMount() {
+  runTimeouts = () => {
     const { winNumbers } = this.state
     for (let i = 0; i < this.state.winNumbers.length - 1; i++) {
       this.timeout[i] = setTimeout(() => {
@@ -42,14 +43,37 @@ class lottoGame extends Component {
     }, 7000)
   }
 
+  componentDidMount() {
+    console.log('didDidMount');
+    this.runTimeouts()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('didUpdate');
+    if (this.state.winBalls.length === 0) {
+      this.runTimeouts()
+    }
+  }
+
   componentWillUnmount() {
     this.timeout.forEach((v) => {
       clearTimeout(v)
     })
   }
 
+  onClickRedo = () => {
+    console.log('onClickRedo');
+    this.setState({
+      winNumbers: getWinNumbers(),
+      winBalls: [],
+      bonus: null,
+      redo: false,
+    })
+    this.timeout = []
+  }
+
   render() {
-    const { winBalls , bonus, redo } = this.state
+    const { winBalls, bonus, redo } = this.state
     return (
       <>
         <div>당첨 숫자</div>
@@ -58,7 +82,7 @@ class lottoGame extends Component {
         </div>
         <div>보너스!</div>
         {bonus && <Ball number={bonus} />}
-        <button onClick={redo ? this.onClickRedo : () => { }}>한 번 더 !</button>
+        {redo && <button onClick={this.onClickRedo}>한 번 더 !</button>}
       </>
     )
   }
