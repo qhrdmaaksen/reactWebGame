@@ -1,5 +1,5 @@
-import React, {useState, useReducer, useCallback} from 'react';
-import Table from './Table'
+import React, { useEffect, useReducer, useCallback } from 'react';
+import Table from './Table';
 
 const initialState = {
 	winner: '',
@@ -7,49 +7,117 @@ const initialState = {
 	tableData: [
 		['', '', ''],
 		['', '', ''],
-		['', '', '']
-	]
+		['', '', ''],
+	],
+	recentCell: [-1, -1],
 };
-export const CLICK_CELL = 'CLICK_CELL';
-export const SET_WINNER = 'SET_WINNER'; // 변수로 따로 빼두는게 좋다
 
-const reducer = (state, action) => { // 액션을 dispatch 할때마다 reducer 가 실행
-	console.log('reducerFunc')
+export const SET_WINNER = 'SET_WINNER';
+export const CLICK_CELL = 'CLICK_CELL';
+export const CHANGE_TURN = 'CHANGE_TURN';
+export const RESET_GAME = 'RESET_GAME';
+
+const reducer = (state, action) => {
+	console.log('reducer');
 	switch (action.type) {
 		case SET_WINNER:
-			// state.winner = action.winner ; 이렇게 하면 안된다
+			// state.winner = action.winner; 이렇게 하면 안됨.
 			return {
-				...state, // 새로운 객체를 만들어서 값을 바꿔줘야한다.
-				winner: action.winner
+				...state,
+				winner: action.winner,
 			};
 		case CLICK_CELL: {
 			const tableData = [...state.tableData];
-			tableData[action.row] = [...tableData[action.row]]; // immer 라는 라이브러리로 가독성 해결
+			tableData[action.row] = [...tableData[action.row]]; // immer라는 라이브러리로 가독성 해결
 			tableData[action.row][action.cell] = state.turn;
 			return {
 				...state,
 				tableData,
+				recentCell: [action.row, action.cell],
 			};
 		}
+		case CHANGE_TURN: {
+			return {
+				...state,
+				turn: state.turn === 'O' ? 'X' : 'O',
+			};
+		}
+		case RESET_GAME: {
+			return {
+				...state,
+				turn: 'O',
+				tableData: [
+					['', '', ''],
+					['', '', ''],
+					['', '', ''],
+				],
+				recentCell: [-1, -1],
+			};
+		}
+		default:
+			return state;
 	}
-}
+};
 
 const TicTacToeHooks = () => {
-	console.log('TicTacToeHooksFunc')
+	console.log('TicTacToeHooks');
 	const [state, dispatch] = useReducer(reducer, initialState);
+	const { tableData, turn, winner, recentCell } = state;
 	// const [winner, setWinner] = useState('');
-	// const [turn, setTurn] = useState('');
-	// const [tableData, setTableData] = useState([['', '', ''],['', '', ''],['', '', '']]);
+	// const [turn, setTurn] = useState('O');
+	// const [tableData, setTableData] = useState([['', '', ''], ['', '', ''], ['', '', '']]);
+
 	const onClickTable = useCallback(() => {
-		dispatch({type: SET_WINNER, winner: 'O'}) // 디스패치안에는 액션을 만들어주고 액션안에 타입을 만들어줘야한다
+		dispatch({ type: SET_WINNER, winner: 'O' });
 	}, []);
+
+	useEffect(() => {
+		console.log('useEffectHooks')
+		const [row, cell] = recentCell;
+		if (row < 0) {
+			return;
+		}
+		let win = false;
+		if (tableData[row][0] === turn && tableData[row][1] === turn && tableData[row][2] === turn) {
+			win = true;
+		}
+		if (tableData[0][cell] === turn && tableData[1][cell] === turn && tableData[2][cell] === turn) {
+			win = true;
+		}
+		if (tableData[0][0] === turn && tableData[1][1] === turn && tableData[2][2] === turn) {
+			win = true;
+		}
+		if (tableData[0][2] === turn && tableData[1][1] === turn && tableData[2][0] === turn) {
+			win = true;
+		}
+		console.log(win, row, cell, tableData, turn);
+		if (win) { // 승리시
+			dispatch({ type: SET_WINNER, winner: turn });
+			dispatch({ type: RESET_GAME });
+		} else {
+			let all = true; // all이 true면 무승부라는 뜻
+			tableData.forEach((row) => { // 무승부 검사
+				row.forEach((cell) => {
+					if (!cell) {
+						all = false;
+					}
+				});
+			});
+			if (all) {
+				dispatch({ type: SET_WINNER, winner: null });
+				dispatch({ type: RESET_GAME });
+			} else {
+				dispatch({ type: CHANGE_TURN });
+			}
+		}
+	}, [recentCell]);
 
 	return (
 			<>
-				<Table onClick={onClickTable} tableData={state.tableData}/>
-				{state.winner && <div>{state.winner}님의 승리!</div>}
+				<Table onClick={onClickTable} tableData={tableData} dispatch={dispatch} />
+				{winner && <div>{winner}님의 승리</div>}
 			</>
 	)
-}
+};
 
 export default TicTacToeHooks;

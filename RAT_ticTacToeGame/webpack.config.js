@@ -4,7 +4,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 module.exports = {
 	name: 'tictactoe-dev',
 	mode: 'development',
-	devtool: 'inline-source-map',
+	devtool: 'eval',
 	resolve: {
 		extensions: ['.js', '.jsx'],
 	},
