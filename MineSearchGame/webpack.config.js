@@ -2,7 +2,7 @@ const path = require('path');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-	name: 'searchGame-setting',
+	name: 'MineSearch-setting',
 	mode: 'development', // 실서비스 사용할땐 : production 으로 변경
 	devtool: 'eval', // 빠르게
 	resolve: {
