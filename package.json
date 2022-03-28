@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-    "pretier": "^0.0.1"
+    "pretier": "^0.0.1",
+    "prettier": "2.6.1"
   }
 }
