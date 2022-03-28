@@ -28,7 +28,7 @@ const initialState = {
     mine: 0,
   },
   timer: 0,
-  result: "",
+  result: '',
   halted: true,
   openedCount: 0,
 };
@@ -118,13 +118,14 @@ const reducer = (state, action) => {
         ) {
           return;
         } // 닫힌 칸만 열기
-        if (checked.includes(row + "/" + cell)) {
+        if (checked.includes(row + '/' + cell)) {
           return;
         } else {
-          checked.push(row + "/" + cell);
+          checked.push(row + '/' + cell);
         } // 한 번 연칸은 무시하기
 
-        let around = [tableData[row][cell - 1], tableData[row][cell + 1]];
+        let around = [tableData[row][cell - 1], tableData[row][cell + 1],
+        ];
         if (tableData[row - 1]) {
           around = around.concat([
             tableData[row - 1][cell - 1],
@@ -136,8 +137,7 @@ const reducer = (state, action) => {
           around = around.concat([
             tableData[row + 1][cell - 1],
             tableData[row + 1][cell],
-            tableData[row + 1][cell + 1],
-          ]);
+            tableData[row + 1][cell + 1]]);
         }
         const count = around.filter(function (v) {
           return [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(v);
@@ -164,18 +164,16 @@ const reducer = (state, action) => {
             });
           }
         }
-        if (tableData[row][cell] === CODE.OPENED) { // 내 칸이 닫힌 칸이면 카운터 증가
+        if (tableData[row][cell] === CODE.NORMAL) { // 내 칸이 닫힌 칸이면 카운터 증가
           openedCount += 1;
         }
         tableData[row][cell] = count;
       };
       checkAround(action.row, action.cell);
       let halted = false;
-      let result = "";
+      let result = '';
       if (
-        state.data.row * state.data.cell - state.data.mine ===
-        state.openedCount + openedCount
-      ) {
+        state.data.row * state.data.cell - state.data.mine === state.openedCount + openedCount      ) {
         // 승리
         halted = true;
         result = `${state.timer}초만에 승리하셨습니다.`;
@@ -244,7 +242,7 @@ const reducer = (state, action) => {
       };
     }
     default:
-      return;
+      return state;
   }
 };
 
@@ -255,8 +253,8 @@ const MineSearchHooks = () => {
   const value = useMemo(
     () => ({
       tableData: tableData,
-      dispatch,
       halted: halted,
+      dispatch,
     }),
     [tableData, halted]
   );

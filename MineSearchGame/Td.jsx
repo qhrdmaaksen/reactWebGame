@@ -49,7 +49,7 @@ const getTdText = (code) => {
     case CODE.FLAG_MINE:
     case CODE.FLAG:
       return "!";
-    case CODE.QUESTION.MINE:
+    case CODE.QUESTION_MINE:
     case CODE.QUESTION:
       return "?";
     default:
@@ -68,7 +68,7 @@ const Td = memo(({ rowIndex, cellIndex }) => {
       case CODE.OPENED:
       case CODE.FLAG_MINE:
       case CODE.FLAG:
-      case CODE.QUESTION.MINE:
+      case CODE.QUESTION_MINE:
       case CODE.QUESTION:
         return;
       case CODE.NORMAL:

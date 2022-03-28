@@ -8,9 +8,9 @@ const Table = memo(() => {
     <table>
       {Array(tableData.length)
         .fill()
-        .map((tr, i) => (
+        .map((tr, i) =>
           <Tr key={i} rowIndex={i} />
-        ))}
+        )}
     </table>
   );
 });
