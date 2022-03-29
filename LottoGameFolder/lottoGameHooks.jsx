@@ -68,4 +68,4 @@ const Lotto = () => {
   );
 };
 
-export default Lotto;
+//export default Lotto;

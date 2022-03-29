@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//import BaseBallFunction from './baseBallGame';
-import BaseBallFunction from './baseBallGameHooks';
+import NumberBaseBall from './baseBallGame';
+//import baseBallGameHooks from './baseBallGameHooks';
 
-ReactDOM.render(<BaseBallFunction />, document.querySelector('#root'))
+ReactDOM.render(<NumberBaseBall />, document.querySelector('#root'))

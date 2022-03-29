@@ -5,7 +5,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//import RSPgame from './RSPgameClass';
-import RSPgame from './RSPgameHooks';
+import RSP from './RSPgameClass';
+//import RSPgameHooks from './RSPgameHooks';
 
-ReactDOM.render(<RSPgame />, document.querySelector('#root'))
+ReactDOM.render(<RSP />, document.querySelector('#root'))

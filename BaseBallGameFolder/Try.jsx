@@ -13,4 +13,4 @@ class Try extends PureComponent {
   }
 }
 
-//export default Try;
+export default Try;

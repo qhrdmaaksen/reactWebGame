@@ -8,4 +8,4 @@ const TryHooks = memo(({ tryInfo }) => { // hooks 에서 props 구조 분해 사
     </li> // key 는 고유해야한다
   )
 })
-export default TryHooks;
+//export default TryHooks;

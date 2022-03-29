@@ -14,7 +14,7 @@ function getWinNumbers() {
 }
 
 
-class lottoGame extends Component {
+class Lotto extends Component {
   state = {
     winNumbers: getWinNumbers(), // 미리 data 를 준비해놓음, 당첨 숫자들
     winBalls: [],
@@ -88,4 +88,4 @@ class lottoGame extends Component {
   }
 }
 
-export default lottoGame;
+export default Lotto;
